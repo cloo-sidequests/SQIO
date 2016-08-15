@@ -1,0 +1,7 @@
+{
+  "name": "sqio",
+  "author": "Chris Loo <cloo@sidequests.ca>",
+  "license": "MIT",
+  "version": "0.1",
+  "description": "An I/O library that can scan for input edges, perform input debouncing, and perform queued output pulses."
+}
