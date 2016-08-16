@@ -99,7 +99,7 @@ boolean SQIO::rise(int pin, boolean debounce) {
 	    int v1 = digitalRead(pin);
 	    int v2 = v1;
 	    boolean ret = false;
-	    if (debounce) {
+	    if (debounce && v1 == HIGH && !this->lastValD[pin]) {
 		    delay(this->debounceTimer);
 		    v2 = digitalRead(pin);
 	    }
@@ -117,7 +117,7 @@ boolean SQIO::rise(int pin, boolean debounce) {
 		boolean v1 = (analogRead(pin) >= this->analogThreshold);;
 		boolean v2 = v1;
 		boolean ret = false;
-		if (debounce) {
+		if (debounce && v1 && !this->lastValA[pin]) {
 		    delay(this->debounceTimer);
 		    v2 = (analogRead(pin) >= this->analogThreshold);
 		}
@@ -144,7 +144,7 @@ boolean SQIO::fall(int pin, boolean debounce) {
 		int v1 = digitalRead(pin);
 	    int v2 = v1;
 	    boolean ret = false;
-	    if (debounce) {
+	    if (debounce && v1 == LOW && this->lastValD[pin]) {
 		    delay(this->debounceTimer);
 		    v2 = digitalRead(pin);
 	    }
@@ -159,7 +159,7 @@ boolean SQIO::fall(int pin, boolean debounce) {
 		boolean v1 = (analogRead(pin) >= this->analogThreshold);;
 		boolean v2 = v1;
 		boolean ret = false;
-		if (debounce) {
+		if (debounce && !v1 && this->lastValA[pin]) {
 		    delay(this->debounceTimer);
 		    v2 = (analogRead(pin) >= this->analogThreshold);
 		}
@@ -183,7 +183,7 @@ boolean SQIO::changed(int pin, boolean debounce) {
 	    int v1 = digitalRead(pin);
 	    int v2 = v1;
 	    boolean ret = false;
-	    if (debounce) {
+	    if (debounce && ((v1 == LOW && this->lastValD[pin]) || (v1 == HIGH && !this->lastValD[pin]))) {
 	        delay(this->debounceTimer);
 	        v2 = digitalRead(pin);
 	    }
@@ -201,7 +201,7 @@ boolean SQIO::changed(int pin, boolean debounce) {
 		boolean v1 = (analogRead(pin) >= this->analogThreshold);
 		boolean v2 = v1;
 		boolean ret = false;
-		if (debounce) {
+		if (debounce && ((!v1 && this->lastValA[pin]) || (v1 && !this->lastValA[pin]))) {
 		    delay(this->debounceTimer);
 		    v2 = (analogRead(pin) >= this->analogThreshold);
 		}

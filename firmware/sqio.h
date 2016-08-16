@@ -87,7 +87,7 @@ public:
 	void setAnalogThreshold(int threshold);			// Set the analog threshold for use as a simulated digital pin
 	void setDebounce(int newTimer);                 // Set a new debounce timer
 	int read(int pin);								// Read the value of the given pin.  Digital returns 0/1 (-1 if err); analog returns 0-1023 (-1 if err)
-	int read(int pin, boolean forceDigital, boolean debounce);		// Read the value of the given pin.  Analog values are returned as if they were digital.  Debounce if desired.
+	int read(int pin, boolean forceDigital, boolean debounce);		// Read the value of the given pin.  forceDigital = analog values are returned as if they were digital.  Debounce if desired.
 	boolean rise(int pin);							// Check if the pin has gone HIGH since the last time it was read.
 	boolean rise(int pin, boolean debounce);
 	boolean fall(int pin);							// Check if the pin has gone LOW since the last time it was read.
@@ -96,7 +96,7 @@ public:
 	boolean changed(int pin, boolean debounce);
 	boolean set(int pin, int val);					// Set the given pin to the given value (HIGH/LOW).  Return false if error (not an output pin)
 	boolean set(int pin, int val, unsigned long time);		// Set the given pin to the given value (HIGH/LOW); will revert to the other value after time milliseconds.  Return false if fail or buffer full.
-	void update();
+	void update();									// Do an update on timered pins.  Run this once every loop.
 	void clearTimers();								// Deactivate all timered pins
 	
 private:
