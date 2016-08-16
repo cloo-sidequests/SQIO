@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <sqio.h>
 
 SQIO::SQIO() {
@@ -17,7 +16,7 @@ SQIO::SQIO() {
 }
 
 // Sets the pinMode.  Also allows for some later error catching (inadvertent reading of an OUTPUT pin).
-boolean SQIO::setMode(int pin, int mode) {
+boolean SQIO::setMode(int pin, PinMode mode) {
 	if (pin < SQIO_MIN_D || pin > SQIO_MAX_D) {
 		return false;
 	}
