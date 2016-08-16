@@ -83,7 +83,7 @@
 class SQIO {
 public:
 	SQIO();
-	boolean setMode(int pin, int mode);				// Set the mode (INPUT/OUTPUT) of the given pin.  Return false if not a D pin
+	boolean setMode(int pin, PinMode mode);				// Set the mode (INPUT/OUTPUT) of the given pin.  Return false if not a D pin
 	void setAnalogThreshold(int threshold);			// Set the analog threshold for use as a simulated digital pin
 	void setDebounce(int newTimer);                 // Set a new debounce timer
 	int read(int pin);								// Read the value of the given pin.  Digital returns 0/1 (-1 if err); analog returns 0-1023 (-1 if err)
